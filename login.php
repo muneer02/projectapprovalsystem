@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/registrationForm.css">
+  <link rel="stylesheet" href="assets/css/registrationForm.css">r
 </head>
 
 <body>
@@ -42,10 +42,7 @@
 
     <div class="form-group">
       <div class="col-md-12 strong">
-        <span class='strong'>New User?</span><button class="btn-link" onClick="registerNow()">Register here</button>
-      </div>
-      <div class="col-md-12 strong">
-        <span class='strong'></span><button class="btn-link" onClick="back_home()">Back To Home Page</button>
+        <span class='strong'>New User?</span><button class="btn-link"><a href="register.php">Register here</a></button>
       </div>
     </div>
   </div>
@@ -53,18 +50,6 @@
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/formSubmit.js"></script>
-
-  <script>
-    function registerNow() {
-      window.location.assign("register.php");
-    }
-  </script>
-   <script>
-    function back_home() {
-      window.location.assign("index.html");
-    }
-  </script>
-
 
 </body>
 
@@ -93,8 +78,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = $conn->query($sql);
   if ($result->num_rows != 0) {
     $row = $result->fetch_assoc();
-    if ($row["approved"] == 1) {
-      header("location: index.php");
+    if ($row["approved"] == true) {
+      header("location: dashboard.php");
     } else {
       die("Attention. Your approval is pending. Try again later.");
     }

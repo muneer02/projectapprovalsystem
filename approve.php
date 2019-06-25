@@ -23,7 +23,6 @@ if ($id) {
 header("location: list.php");
 
 function alert($message){
-    echo "hello";
     echo '<script language="javascript">';
     echo 'alert("'.$message.'")';
     echo '</script>';

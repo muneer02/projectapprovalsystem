@@ -118,11 +118,8 @@
 
         <div class="form-group">
             <div class="col-md-12 text-center strong">
-                <span class='strong'>Already Registered?</span><button class="btn-link" onClick="logIn()">Go to Login</button>
+                <span class='strong'>Already Registered?</span><button class="btn-link"><a href="login.php">Go to Login</a></button>
             </div>
-            <div class="col-md-12 text-center strong">
-        <span class='strong'></span><button class="btn-link" onClick="back_home()">Back To Home Page</button>
-      </div>  
         </div>
     </div>
 
@@ -130,17 +127,6 @@
     <script src="assets/js/bootstrap.min.js"></script>
 
     <script src="assets/js/formSubmit.js"></script>
-
-    <script>
-        function logIn() {
-            window.location.assign("login.php")
-        }
-    </script>
-     <script>
-    function back_home() {
-      window.location.assign("index.html");
-    }
-  </script>
 
 </body>
 
@@ -215,10 +201,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             die("Enter valid registration number");
         }
-        $approved = 1;
+        $approved = true;
     } else {
         $semester = $registration_no = null;
-        $approved = 0;
+        $approved = false;
     }
 
 
