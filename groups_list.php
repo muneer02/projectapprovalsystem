@@ -18,6 +18,7 @@
 <body>
 
     <?php
+    include 'check_session.php';
     include 'connect.php';
 
 

@@ -201,10 +201,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             die("Enter valid registration number");
         }
-        $approved = true;
+        $approved = 1;
     } else {
         $semester = $registration_no = null;
-        $approved = false;
+        $approved = 0;
     }
 
 

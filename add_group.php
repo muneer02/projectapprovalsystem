@@ -16,7 +16,7 @@
   $sql = "INSERT INTO groups (name) VALUES ('$group_name')";
 
     if ($conn->query($sql) === TRUE) {
-        header("location: groups.php");
+        header("location: groups_list.php");
     }
     else {
         echo "Error creating group: <br>" . $conn->error;

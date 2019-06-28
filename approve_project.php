@@ -5,22 +5,21 @@ if ($id) {
 
     include 'connect.php';
 
-    // sql to delete a record
-    $value=true;
-    $sql = "UPDATE users set approved=".$value." where id="."$id";
+    $value=1;
+    $sql = "UPDATE projects set approved=".$value." where id="."$id";
 
     if ($conn->query($sql) === TRUE) {
-        alert("User approved successfully");
+        alert("Project approved successfully");
         
     } else {
-        alert("Error approving record: " . $conn->error);
+        alert("Error approving project: " . $conn->error);
     }
 
     $conn->close();
 } else {
     alert("Invalid Id.");
 }
-header("location: list.php");
+header("location: projects_list.php");
 
 function alert($message){
     echo '<script language="javascript">';

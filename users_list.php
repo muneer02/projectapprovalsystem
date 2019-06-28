@@ -71,7 +71,7 @@
                             <td><?php echo ($row["mobile"]); ?></td>
                             <td><?php echo ($row["approved"]); ?></td>
 
-                            <td><button><a href="approve.php?id=<?php echo ($row["id"]); ?>">Approve</a></button></td>
+                            <td><button><a href="approve_user.php?id=<?php echo ($row["id"]); ?>">Approve</a></button></td>
                             <td><button><a href="delete.php?id=<?php echo ($row["id"]); ?>">Delete</a></button></td>
                         </tr>
 
@@ -118,7 +118,7 @@
                             <td><?php echo ($row["mobile"]); ?></td>
                             <td><?php echo ($row["approved"]); ?></td>
 
-                            <td><button><a href="approve.php?id=<?php echo ($row["id"]); ?>">Approve</a></button></td>
+                            <td><button><a href="approve_user.php?id=<?php echo ($row["id"]); ?>">Approve</a></button></td>
                             <td><button><a href="delete.php?id=<?php echo ($row["id"]); ?>">Delete</a></button></td>
                         </tr>
 

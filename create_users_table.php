@@ -2,7 +2,7 @@
     include 'connect.php';
 
     // sql to create table
-    $sql = "CREATE TABLE users (
+    $sql = "CREATE TABLE khalid (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
         fullname VARCHAR(30) NOT NULL,
         dob DATE NOT NULL,
@@ -16,7 +16,7 @@
         password VARCHAR(40) NOT NULL,
         role VARCHAR(7) NOT NULL,
         approved boolean NOT NULL,
-        group_id INT UNSIGNED NOT NULL,
+        group_id INT UNSIGNED,
         FOREIGN KEY (group_id) REFERENCES groups(id),
         created_at TIMESTAMP NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW()

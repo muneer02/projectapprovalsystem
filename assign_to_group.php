@@ -23,7 +23,7 @@ if ($id && $_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
   alert("Invalid Id.");
 }
-header("location: groups.php");
+header("location: groups_list.php");
 
 
 function test_input($data)

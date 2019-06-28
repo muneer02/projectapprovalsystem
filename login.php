@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/registrationForm.css">r
+  <link rel="stylesheet" href="assets/css/registrationForm.css">
 </head>
 
 <body>
@@ -77,9 +77,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $sql = "SELECT * FROM users WHERE email= '$email' AND password ='$password'";
   $result = $conn->query($sql);
   if ($result->num_rows != 0) {
-    $row = $result->fetch_assoc();
-    if ($row["approved"] == true) {
-      header("location: dashboard.php");
+    $user = $result->fetch_assoc();
+    if ($user["approved"] == true) {
+      session_start();
+      $_SESSION['user']=$user;
+          
+      echo "Login Successful";
+    
+      // header("location: groups_list.php");
     } else {
       die("Attention. Your approval is pending. Try again later.");
     }

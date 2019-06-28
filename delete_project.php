@@ -6,19 +6,19 @@ if ($id) {
     include 'connect.php';
 
     // sql to delete a record
-    $sql = "DELETE FROM users WHERE id=" . $id;
+    $sql = "DELETE FROM projects WHERE id=" . $id;
 
     if ($conn->query($sql) === TRUE) {
-        echo "Record deleted successfully";
+        echo "Project deleted successfully";
         
     } else {
-        echo "Error deleting record: " . $conn->error;
+        echo "Error deleting project: " . $conn->error;
     }
 
     $conn->close();
 } else {
     echo "Invalid Id.";
 }
-header("location: users_list.php");
+header("location: projects_list.php");
 
 ?>

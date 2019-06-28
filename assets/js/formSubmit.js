@@ -19,7 +19,7 @@ $("#regForm").submit(function (event) {
         timeout: 600000,
         success: function (data) {
             var index = data.indexOf('</html>');
-            data = data.substring(index+7);
+            data = data.substring(index+9);
             alert(data);
             // var x = "You have been successfully registered.";
             // if (data == x) {
@@ -55,12 +55,13 @@ $("#loginForm").submit(function (event) {
         timeout: 600000,
         success: function (data) {
             var index = data.indexOf('</html>');
-            data = data.substring(index+7);
+            data = data.substring(index+9);
+            console.log('da',data);
             alert(data);
-            // var x = "You have been successfully registered.";
-            // if (data == x) {
-            //     window.location.assign("pdf/receipt.php")
-            // }
+            var x = "Login Successful";
+            if (data == x) {
+                window.location.assign("groups_list.php")
+            }
         },
         error: function (e) {
             alert(e);
@@ -91,7 +92,7 @@ $("#projectForm").submit(function (event) {
         timeout: 600000,
         success: function (data) {
             var index = data.indexOf('</html>');
-            data = data.substring(index+7);
+            data = data.substring(index+9);
             alert(data);
             // var x = "You have been successfully registered.";
             // if (data == x) {
