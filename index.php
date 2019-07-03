@@ -1,13 +1,11 @@
 <?php
 
-    // session_start();
-    // if(session_id(2)){
-        
-    // }
-    // else{
-    //     echo"hello";
+    session_start();
+    if($_SESSION['user']){
+        header('Location: home.php');
+    }
+    else{
         header('Location: login.php');
-    //     exit;
-    // }
+    }
 
 ?>

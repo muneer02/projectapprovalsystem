@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Projects - Project Approval System</title>
+    <title>Previous Year Projects - Project Approval System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -48,7 +48,7 @@
             <div class="table-responsive">
 
             <input type="text" id="searchProjects" onkeyup="filterProjects()" placeholder="Search for project..">
-            <h4 class="text-center">List of Projects</h4>
+            <h4 class="text-center">Previous Year Projects</h4>
 
                 <table class="table table-hover table-bordered table-condensed" id="projectsTable">
                     <thead>
@@ -56,8 +56,8 @@
                             <th>S.No.</th>
                             <th>Project Title</th>
                             <th>Project Description</th>
-                            <th>Group</th>
-                            <th colspan=3>Actions</th>
+                            <th>Session</th>
+                            <th colspan=2>Actions</th>
                         </tr>
                     </thead>
 
@@ -79,7 +79,7 @@
                     
                         // }
 
-                        $sql = "SELECT * FROM projects where session='2016'";
+                        $sql = "SELECT * FROM projects where session<'2016' AND approved=1";
 
                         $projects = $conn->query($sql);
 
@@ -91,38 +91,10 @@
                             <tr>
                             <td><?php echo ++$counter.'.'; ?></td>
                             <td class="projectTitle"><?php echo ($project["title"]); ?></td>
-                                <td><?php echo ($project["description"]); ?></td>
-                                <td><?php
-                                    $sql = "SELECT * FROM groups WHERE id =" . $project["group_id"];
-                                    $result = $conn->query($sql);
-                                    $group = $result->fetch_assoc();
-
-                                    echo ($group["name"]);
-                                    echo "<ol type='i'>";
-                                    $sql = "SELECT fullname FROM users WHERE group_id =" . $group["id"];
-                                    $group_students = $conn->query($sql);
-                                    foreach ($group_students as $student) :
-                                        echo "<li>" . ($student['fullname']);
-                                        "</li>";
-                                        echo "";
-                                    endforeach;
-                                    echo "</ol>";
-                                    ?>
-                                </td>
-                                <td><a href="<?php echo ($project["synopsis"]); ?>"><button>Download Synopsis</button></a></td>
-                                
-                                    <?php
-                                        if($project['approved']){
-                                            if($project['documentation']){
-                                                echo "<td><a href='".$project['documentation']."'><button>Download Documentation</button></a></td>";
-                                            }
-                                        }
-                                        else{
-                                            echo "<td><a href='approve_project.php?id=".$project['id']."'><button>Approve Project</button></a></td>";
-                                            echo "<td><a href='delete_project.php?id=".$project['id']."'><button>Discard Project</button></a></td>";
-                                        }
-                                    ?>
-
+                            <td><?php echo ($project["description"]); ?></td>
+                            <td><?php echo ($project["session"]); ?></td>
+                            <td><a href="<?php echo ($project["synopsis"]); ?>"><button>Download Synopsis</button></a></td>
+                            <td><a href="<?php echo ($project["documentation"]); ?>"><button>Download Documentation</button></a></td>
                             </tr>
 
                         <?php

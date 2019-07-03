@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_SESSION['user'])){
+    header('Location: home.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,12 +86,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($result->num_rows != 0) {
     $user = $result->fetch_assoc();
     if ($user["approved"] == true) {
-      session_start();
       $_SESSION['user']=$user;
           
       echo "Login Successful";
-    
-      // header("location: groups_list.php");
     } else {
       die("Attention. Your approval is pending. Try again later.");
     }

@@ -10,7 +10,11 @@
 </head>
 
 <body>
+    <?php 
+        include 'check_session.php';
+        include 'navbar.html';
 
+    ?>
     <div class="container">
         <h3 class="text-center">Add Project</h3><br /><br />
         <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="projectForm" enctype="multipart/form-data">

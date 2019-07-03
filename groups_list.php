@@ -11,6 +11,9 @@
         td {
             text-align: center;
         }
+        table,th,tr,td{
+            border-color: #aaa !important;
+        }
     </style>
     <link rel="stylesheet" href="assets/css/registrationForm.css">
 </head>
@@ -18,8 +21,9 @@
 <body>
 
     <?php
-    include 'check_session.php';
+    // include 'check_session.php';
     include 'connect.php';
+    include 'navbar.html';
 
 
     $sql = "SELECT * FROM groups";

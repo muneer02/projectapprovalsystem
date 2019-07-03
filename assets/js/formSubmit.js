@@ -21,10 +21,10 @@ $("#regForm").submit(function (event) {
             var index = data.indexOf('</html>');
             data = data.substring(index+9);
             alert(data);
-            // var x = "You have been successfully registered.";
-            // if (data == x) {
-            //     window.location.assign("pdf/receipt.php")
-            // }
+            var x = "You have been successfully registered.";
+            if (data == x) {
+                window.location.assign("login.php")
+            }
         },
         error: function (e) {
             alert(e);
@@ -57,10 +57,12 @@ $("#loginForm").submit(function (event) {
             var index = data.indexOf('</html>');
             data = data.substring(index+9);
             console.log('da',data);
-            alert(data);
             var x = "Login Successful";
             if (data == x) {
-                window.location.assign("groups_list.php")
+                window.location.assign("home.php")
+            }
+            else{
+                alert(data);
             }
         },
         error: function (e) {
