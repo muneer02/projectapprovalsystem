@@ -35,7 +35,20 @@
     include 'navbar.html';
     include 'connect.php';
 
-
+    
+    $user = $_SESSION['user'];
+    if($user['role']=="TEACHER"){
+        $sql = "SELECT * FROM projects where session='2016' AND guide_id = ".$user['id'];
+    }
+    else if($user['role']=="HOD"){
+        $sql = "SELECT * FROM projects where session='2016' AND department = '".$user['department']."'";
+    }
+    else{
+        // echo "<script>alert('Students are not allowed to access this section');</script>";
+        // echo "<script>location.href = 'home.php';</script>";
+        header('Location: home.php');
+        exit();
+    }
     ?>
 
 
@@ -63,23 +76,7 @@
 
                     <tbody>
                         <?php
-
-                        // $user = $_SESSION['user'];
-
-                        // if($user['role']="TEACHER"){
-                        //     $sql = "SELECT * FROM projects where session='2016'AND guide_id = ".$user['id'];
-
-                        // }
-                        // else if($user['role']="HOD"){
-                        //     $sql = "SELECT * FROM projects where session='2016' AND department = ".$user['department'];
-                        // }
-                        // else{
-                        //     echo "<script>alert('Students aren't allowed to access this section);</script>";
-                        //     echo "<script>location.href = 'home.php';</script>";
-                    
-                        // }
-
-                        $sql = "SELECT * FROM projects where session='2016'";
+                        // $sql = "SELECT * FROM projects where session='2016'";
 
                         $projects = $conn->query($sql);
 

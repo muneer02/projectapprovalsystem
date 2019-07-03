@@ -22,6 +22,11 @@
 
     <?php
     include 'check_session.php';
+    $user=$_SESSION['user'];
+    if($user['role'] != 'ADMIN'){
+        header('Location: home.php');
+        exit();
+    }
     include 'navbar.html';
     include 'connect.php';
 

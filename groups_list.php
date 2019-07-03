@@ -21,15 +21,22 @@
 <body>
 
     <?php
-    // include 'check_session.php';
+    include 'check_session.php';
     include 'connect.php';
     include 'navbar.html';
-
 
     $sql = "SELECT * FROM groups";
     $groups = $conn->query($sql);
 
-    $sql = "SELECT * FROM users WHERE role = 'STUDENT'";
+    $user = $_SESSION['user'];
+    if($user['role']=="HOD"){
+        $sql = "SELECT * FROM users WHERE role = 'STUDENT' AND department = '".$user['department']."'";
+    }
+    else{
+        header('Location: home.php');
+        exit();
+    }
+
     $students = $conn->query($sql);
 
     ?>

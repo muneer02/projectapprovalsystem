@@ -94,12 +94,13 @@ $("#projectForm").submit(function (event) {
         timeout: 600000,
         success: function (data) {
             var index = data.indexOf('</html>');
-            data = data.substring(index+9);
+            data = data.substring(index+11);
             alert(data);
-            // var x = "You have been successfully registered.";
-            // if (data == x) {
-            //     window.location.assign("pdf/receipt.php")
-            // }
+            var x = "Submission successful";
+            console.log('x',data);
+            if (data == x) {
+                window.location.assign("home.php")
+            }
         },
         error: function (e) {
             alert(e);

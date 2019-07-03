@@ -14,6 +14,16 @@
         include 'check_session.php';
         include 'navbar.html';
 
+        $user = $_SESSION['user'];
+        if($user['role'] != "STUDENT"){
+            echo "<script>location.href = 'home.php';</script>";
+            exit();
+        }
+        else if(!$user['group_id']){
+            echo "<script>alert('Your must be assigned to a group before you upload a project.');</script>";
+            echo "<script>location.href = 'home.php';</script>";    
+            exit();
+        }    
     ?>
     <div class="container">
         <h3 class="text-center">Add Project</h3><br /><br />
@@ -48,20 +58,6 @@
                             ?>
                         </select>
                     </div>
-                    <label class="control-label col-md-2" for="group">Group</label>
-                    <div class="col-md-3">
-                        <select class="form-control" name="group" id="group">
-                            <option value="">Select your Group</option>
-                            <?php
-                            $sql = "SELECT * FROM groups";
-                            $groups = $conn->query($sql);
-
-                            foreach ($groups as $group) :
-                                echo "<option value='" . $group["id"] . "'>" . $group["name"] . "</option>";
-                            endforeach
-                            ?>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -92,10 +88,10 @@
                     <div class="col-md-3">
                         <input type="file" accept="application/pdf" class="form-control" name="synopsis" id="synopsis">
                     </div>
-                    <label class="control-label col-md-2" for="documentation">Documentation</label>
+                    <!-- <label class="control-label col-md-2" for="documentation">Documentation</label>
                     <div class="col-md-3">
                         <input type="file" accept="application/pdf" class="form-control" name="documentation" id="documentation">
-                    </div>
+                    </div> -->
                 </div>
                 <br>
 
@@ -144,7 +140,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     include 'connect.php';
 
-    $title = $description = $guide = $department = $session = $approved = $synopsisFile = $documentationFile  = "";
+    $title = $description = $guide = $department = $session = $approved = $synopsisFile = "";
+    //  $documentationFile  = "";
 
     if (isset($_POST["title"]) && test_input($_POST["title"]) != '') {
         $title = test_input($_POST["title"]);
@@ -161,13 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["guide"]) && test_input($_POST["guide"]) != '') {
         $guide = test_input($_POST["guide"]);
     } else {
-        die("select guide");
-    }
-
-    if (isset($_POST["group"]) && test_input($_POST["group"]) != '') {
-        $group = test_input($_POST["group"]);
-    } else {
-        die("select group");
+        die("Select guide");
     }
 
     if (isset($_POST["department"]) && test_input($_POST["department"]) != '') {
@@ -183,10 +174,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $synopsisFile = upload_file("synopsis",$title);
-    $documentationFile = upload_file("documentation",$title);
+    // $documentationFile = upload_file("documentation",$title);
 
-    $sql = "INSERT INTO projects (title, description, guide_id, group_id, department, session, synopsis, documentation, approved)
-        VALUES ('$title', '$description', $guide, $group, '$department', '$session', '$synopsisFile', '$documentationFile', 0)";
+    $group = $user['group_id'];
+
+    $sql = "INSERT INTO projects (title, description, guide_id, group_id, department, session, synopsis, approved)
+        VALUES ('$title', '$description', $guide, $group, '$department', '$session', '$synopsisFile', 0)";
 
     if ($conn->query($sql) === TRUE) {
         echo "Submission successful";
@@ -196,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
         unlink($synopsisFile); //delete synopsis file from storage
-        unlink($documentationFile);  //delete documentation file from storage
+        // unlink($documentationFile);  //delete documentation file from storage
     }
 
     $conn->close();
