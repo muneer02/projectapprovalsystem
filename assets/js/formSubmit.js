@@ -110,3 +110,40 @@ $("#projectForm").submit(function (event) {
 });
 
 
+$("#updateProjectForm").submit(function (event) {
+    //stop submit the form, we will post it manually.
+    event.preventDefault();
+
+    // Get form
+    var form = $('#updateProjectForm')[0];
+
+    // Create an FormData object
+    var data = new FormData(form);
+    var id = data.get('id');
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "update_project.php?id="+id,
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var index = data.indexOf('</html>');
+            data = data.substring(index+11);
+            alert(data);
+            var x = "Submission successful";
+            console.log('x',data);
+            if (data == x) {
+                window.location.assign("my_projects.php")
+            }
+        },
+        error: function (e) {
+            alert(e);
+        }
+    });
+
+});
+
+
