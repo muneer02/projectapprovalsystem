@@ -1,3 +1,6 @@
+two files to configure for ths
+1. C:\xampp\sendmail\sendmail.ini
+2. C:\xampp\php\php.ini
 <html>
 <body>
 
